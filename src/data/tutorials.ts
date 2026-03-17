@@ -6,6 +6,49 @@ export const tutorials: Tutorial[] = [
     title: 'Introduction to R',
     description: 'Get started with the basics of R programming and its environment.',
     category: 'R Programming Setup & Syntax',
+    staticOutputs: {
+      'print("Hello, R World!")': {
+        output: ['[1] "Hello, R World!"']
+      },
+      'x <- 10\ny <- 5\nx + y': {
+        output: ['[1] 15']
+      },
+      '# Addition\n2 + 2': {
+        output: ['[1] 4']
+      }
+    },
+    quizQuestions: [
+      {
+        question: "What is R primarily used for?",
+        options: ["Web Development", "Statistical Computing and Graphics", "Mobile App Development", "Game Design"],
+        correctAnswer: 1,
+        explanation: "R is a powerful language and environment specifically designed for statistical computing and graphics."
+      },
+      {
+        question: "Which symbol is used for assignment in R (preferred)?",
+        options: ["=", "==", "<-", "->"],
+        correctAnswer: 2,
+        explanation: "While '=' works, '<-' is the preferred assignment operator in the R community."
+      },
+      {
+        question: "How do you get help for a specific function in R?",
+        options: ["help(function_name)", "?function_name", "Both are correct", "None are correct"],
+        correctAnswer: 2,
+        explanation: "You can use either the help() function or the '?' prefix to access documentation."
+      },
+      {
+        question: "Is R open source?",
+        options: ["Yes", "No"],
+        correctAnswer: 0,
+        explanation: "Yes, R is a free, open-source language with a large contributing community."
+      },
+      {
+        question: "What is CRAN?",
+        options: ["A type of R plot", "The Comprehensive R Archive Network", "An R data structure", "A coding editor"],
+        correctAnswer: 1,
+        explanation: "CRAN is the primary repository for R packages and software."
+      }
+    ],
     content: `
 # Welcome to R Programming
 
@@ -42,6 +85,38 @@ You can get help on any function by typing \`?function_name\`:
     title: 'Introduction to Data',
     description: 'Understand the nature, types, and characteristics of data in R.',
     category: 'R Programming Setup & Syntax',
+    quizQuestions: [
+      {
+        question: "What are the two broad categories of data?",
+        options: ["Hard and Soft", "Qualitative and Quantitative", "Big and Small", "Fast and Slow"],
+        correctAnswer: 1,
+        explanation: "Data is generally classified as Qualitative (categorical) or Quantitative (numerical)."
+      },
+      {
+        question: "Which measurement scale has a true zero point?",
+        options: ["Nominal", "Ordinal", "Interval", "Ratio"],
+        correctAnswer: 3,
+        explanation: "Ratio scales have a true zero point, allowing for meaningful ratios between values (e.g., weight)."
+      },
+      {
+        question: "Eye color is an example of which data type?",
+        options: ["Nominal", "Ordinal", "Interval", "Ratio"],
+        correctAnswer: 0,
+        explanation: "Eye color is categorical data without a natural order, making it Nominal."
+      },
+      {
+        question: "What R object is used to represent categorical data?",
+        options: ["Vector", "Matrix", "Factor", "List"],
+        correctAnswer: 2,
+        explanation: "Factors are specifically designed in R to handle categorical variables and their levels."
+      },
+      {
+        question: "Which characteristic ensures data follows the same format throughout?",
+        options: ["Accuracy", "Completeness", "Consistency", "Timeliness"],
+        correctAnswer: 2,
+        explanation: "Consistency means data is formatted uniformly across the entire dataset."
+      }
+    ],
     content: `
 # Introduction to Data
 
@@ -96,6 +171,38 @@ cat("Tallest Person:", max_height, "cm\\n")
     title: 'Installation: R & RStudio',
     description: 'Step-by-step guide to setting up your R development environment.',
     category: 'R Programming Setup & Syntax',
+    quizQuestions: [
+      {
+        question: "What is the 'engine' of the R environment?",
+        options: ["RStudio", "The R Language", "CRAN", "Posit"],
+        correctAnswer: 1,
+        explanation: "R is the actual programming language and engine that performs the computations."
+      },
+      {
+        question: "What does IDE stand for?",
+        options: ["Internal Data Engine", "Integrated Development Environment", "Interactive Design Editor", "Independent Data Entry"],
+        correctAnswer: 1,
+        explanation: "IDE stands for Integrated Development Environment, which provides tools to make coding easier."
+      },
+      {
+        question: "Where do you download the R language from?",
+        options: ["GitHub", "CRAN", "Google Play", "Microsoft Store"],
+        correctAnswer: 1,
+        explanation: "CRAN (The Comprehensive R Archive Network) is the official source for R."
+      },
+      {
+        question: "Which application provides the 'dashboard' for R?",
+        options: ["Excel", "RStudio", "Python", "Notepad"],
+        correctAnswer: 1,
+        explanation: "RStudio is the popular IDE that provides a user-friendly interface for R."
+      },
+      {
+        question: "How do you install a new package in R?",
+        options: ["get.package()", "download()", "install.packages()", "add()"],
+        correctAnswer: 2,
+        explanation: "The install.packages('package_name') function is used to download and install packages from CRAN."
+      }
+    ],
     content: `
 # Setting Up Your R Environment
 
@@ -144,6 +251,38 @@ fortune() # Displays a random quote from the R community
     title: 'The R Environment',
     description: 'Master workspace management, console commands, and file execution.',
     category: 'R Programming Setup & Syntax',
+    quizQuestions: [
+      {
+        question: "Which function lists all objects in your current workspace?",
+        options: ["list()", "objects()", "ls()", "show()"],
+        correctAnswer: 2,
+        explanation: "The ls() function lists all user-defined objects in the current R session."
+      },
+      {
+        question: "How do you clear your entire workspace?",
+        options: ["clear()", "rm(list = ls())", "delete.all()", "reset()"],
+        correctAnswer: 1,
+        explanation: "rm(list = ls()) removes all objects currently stored in the workspace."
+      },
+      {
+        question: "What command finds your current working directory?",
+        options: ["whereami()", "pwd()", "getwd()", "dir()"],
+        correctAnswer: 2,
+        explanation: "getwd() returns the path to the current working directory."
+      },
+      {
+        question: "How do you change your working directory?",
+        options: ["goto()", "cd()", "setwd()", "move()"],
+        correctAnswer: 2,
+        explanation: "setwd('path') is used to change the directory R uses for reading/writing files."
+      },
+      {
+        question: "What keyboard shortcut clears the console screen?",
+        options: ["Ctrl + C", "Ctrl + L", "Ctrl + X", "Ctrl + Z"],
+        correctAnswer: 1,
+        explanation: "Ctrl + L is a common shortcut to visually clear the R console."
+      }
+    ],
     content: `
 # Navigating the R Environment
 
@@ -203,6 +342,38 @@ print(paste("I am currently working in:", current_dir))
     title: 'R Syntax & Scope',
     description: 'Learn basic commands, variable assignment, and understanding scope.',
     category: 'R Programming Setup & Syntax',
+    quizQuestions: [
+      {
+        question: "Is R case-sensitive?",
+        options: ["Yes", "No"],
+        correctAnswer: 0,
+        explanation: "Yes, 'MyVar' and 'myvar' are treated as completely different variables in R."
+      },
+      {
+        question: "Which symbol is used for comments in R?",
+        options: ["//", "/*", "#", "--"],
+        correctAnswer: 2,
+        explanation: "The '#' symbol is used to start a single-line comment in R."
+      },
+      {
+        question: "What is 'Local Scope'?",
+        options: ["Accessible everywhere", "Accessible only inside a function", "Accessible only in one file", "Accessible only to the admin"],
+        correctAnswer: 1,
+        explanation: "Local scope refers to variables defined within a function that are not visible outside of it."
+      },
+      {
+        question: "Can you use ';' to separate commands on one line?",
+        options: ["Yes", "No"],
+        correctAnswer: 0,
+        explanation: "Yes, semicolons can be used to put multiple R commands on a single line."
+      },
+      {
+        question: "What happens if you try to access a local variable from the global scope?",
+        options: ["It works fine", "It returns NULL", "It causes an error", "It returns 0"],
+        correctAnswer: 2,
+        explanation: "R will throw an 'object not found' error because the local variable does not exist in the global environment."
+      }
+    ],
     content: `
 # R Syntax and Variable Scope
 
@@ -264,6 +435,55 @@ print(global_var)
     title: 'Building Blocks of R',
     description: 'Explore keywords, operators, and primitive data types.',
     category: 'R Programming Setup & Syntax',
+    staticOutputs: {
+      'a <- 10\nb <- 3\n\n# Arithmetic\ncat("10 divided by 3 is", a / b, "\\n")\ncat("The remainder of 10/3 is", a %% b, "\\n")\n\n# Relational and Logical\nis_greater <- a > b\nis_even <- (a %% 2 == 0)\n\nprint(is_greater & is_even)': {
+        output: ['10 divided by 3 is 3.333333 ', 'The remainder of 10/3 is 1 ', '[1] TRUE']
+      },
+      '# Logical\ntypeof(TRUE)': {
+        output: ['[1] "logical"']
+      },
+      '# Numeric (Double precision)\ntypeof(3.14)': {
+        output: ['[1] "double"']
+      },
+      '# Integer\ntypeof(5L)': {
+        output: ['[1] "integer"']
+      },
+      '# Character\ntypeof("R Programming")': {
+        output: ['[1] "character"']
+      }
+    },
+    quizQuestions: [
+      {
+        question: "Which of the following is a reserved keyword in R?",
+        options: ["sum", "mean", "if", "plot"],
+        correctAnswer: 2,
+        explanation: "'if' is a reserved keyword for control flow and cannot be used as a variable name."
+      },
+      {
+        question: "What does the '%%' operator calculate?",
+        options: ["Percentage", "Exponent", "Modulus (Remainder)", "Division"],
+        correctAnswer: 2,
+        explanation: "The '%%' operator returns the remainder after division."
+      },
+      {
+        question: "Which operator is used for 'Logical AND'?",
+        options: ["|", "&", "!", "&&"],
+        correctAnswer: 1,
+        explanation: "The '&' symbol is used for element-wise logical AND operations."
+      },
+      {
+        question: "What is the result of 'typeof(5L)'?",
+        options: ["double", "numeric", "integer", "character"],
+        correctAnswer: 2,
+        explanation: "The 'L' suffix explicitly tells R to store the number as an integer."
+      },
+      {
+        question: "Which value represents 'Not a Number' in R?",
+        options: ["NULL", "NA", "NaN", "Inf"],
+        correctAnswer: 2,
+        explanation: "NaN stands for 'Not a Number' and is used for undefined mathematical results."
+      }
+    ],
     content: `
 # The Building Blocks of R
 
@@ -330,6 +550,46 @@ typeof("R Programming")
     title: 'Variables & Data Types',
     description: 'Learn about numeric, character, logical, and factor types in R.',
     category: 'R Programming Setup & Syntax',
+    staticOutputs: {
+      'my_numeric <- 42.5\nmy_character <- "R is fun"\nmy_logical <- TRUE\n\n# Check the type\nclass(my_numeric)\nclass(my_character)': {
+        output: ['[1] "numeric"', '[1] "character"']
+      },
+      'gender <- factor(c("male", "female", "female", "male"))\nlevels(gender)': {
+        output: ['[1] "female" "male"']
+      }
+    },
+    quizQuestions: [
+      {
+        question: "Which data type is used for decimal values like 10.5?",
+        options: ["Integer", "Numeric", "Character", "Logical"],
+        correctAnswer: 1,
+        explanation: "Numeric (or double) is the default type for numbers with decimals in R."
+      },
+      {
+        question: "What is the result of 'class(\"123\")'?",
+        options: ["numeric", "integer", "character", "factor"],
+        correctAnswer: 2,
+        explanation: "Anything enclosed in quotes is treated as a character string in R."
+      },
+      {
+        question: "Which function converts a numeric value to a character?",
+        options: ["as.text()", "as.character()", "to.string()", "char()"],
+        correctAnswer: 1,
+        explanation: "The as.character() function is used for type conversion to character strings."
+      },
+      {
+        question: "What is the logical value for 'True' in R?",
+        options: ["true", "True", "TRUE", "T"],
+        correctAnswer: 2,
+        explanation: "R uses all-caps TRUE (or the shorthand T) for logical true."
+      },
+      {
+        question: "What function is used to check the class of an object?",
+        options: ["type()", "class()", "whatis()", "kind()"],
+        correctAnswer: 1,
+        explanation: "The class() function returns the high-level class of an R object."
+      }
+    ],
     content: `
 # Variables and Data Types
 
@@ -365,6 +625,38 @@ levels(gender)
     title: 'Input & Output',
     description: 'Interactive user input and formatted output functions.',
     category: 'Logic & Data Structures',
+    quizQuestions: [
+      {
+        question: "Which function is used to read a line of text from the user?",
+        options: ["read()", "input()", "readline()", "scan()"],
+        correctAnswer: 2,
+        explanation: "The readline() function is used to capture interactive user input from the console."
+      },
+      {
+        question: "What does 'as.numeric()' do in the context of user input?",
+        options: ["Prints a number", "Converts input text to a numeric type", "Checks if input is a number", "None of the above"],
+        correctAnswer: 1,
+        explanation: "readline() returns a character string, so as.numeric() is needed to perform calculations on numeric input."
+      },
+      {
+        question: "Which output function is best for mixing text and variables without extra brackets?",
+        options: ["print()", "cat()", "show()", "display()"],
+        correctAnswer: 1,
+        explanation: "The cat() function is flexible and allows concatenating multiple objects for a cleaner output."
+      },
+      {
+        question: "What symbol is used for a new line in 'cat()'?",
+        options: ["/n", "\\n", "<br>", "endl"],
+        correctAnswer: 1,
+        explanation: "The escape sequence '\\n' represents a newline character in R strings."
+      },
+      {
+        question: "Which function allows for C-style string formatting (e.g., %.2f)?",
+        options: ["format()", "sprintf()", "paste()", "glue()"],
+        correctAnswer: 1,
+        explanation: "sprintf() provides precise control over how numbers and strings are formatted in the output."
+      }
+    ],
     content: `
 # Input and Output in R
 
@@ -411,6 +703,38 @@ sprintf("Pi to 2 decimal places: %.2f", val)
     title: 'Decision Making',
     description: 'If-Else statements and Switch cases.',
     category: 'Logic & Data Structures',
+    quizQuestions: [
+      {
+        question: "What is the correct syntax for an 'if' statement in R?",
+        options: ["if x > 5 then", "if (x > 5) { }", "if x > 5 { }", "if [x > 5]"],
+        correctAnswer: 1,
+        explanation: "R requires parentheses around the condition and curly braces for the code block."
+      },
+      {
+        question: "Which statement is used to check multiple conditions in sequence?",
+        options: ["else if", "elif", "otherwise", "next if"],
+        correctAnswer: 0,
+        explanation: "The 'else if' statement allows you to check a new condition if the previous one was false."
+      },
+      {
+        question: "What function is useful for choosing between multiple specific values?",
+        options: ["choose()", "select()", "switch()", "case()"],
+        correctAnswer: 2,
+        explanation: "The switch() function evaluates an expression and returns a value based on matching a list of options."
+      },
+      {
+        question: "In an if-else block, when does the 'else' part execute?",
+        options: ["Always", "Never", "When the 'if' condition is FALSE", "When the 'if' condition is TRUE"],
+        correctAnswer: 2,
+        explanation: "The 'else' block provides a fallback that only runs if the 'if' (and any 'else if') conditions are not met."
+      },
+      {
+        question: "Can you nest 'if' statements inside other 'if' statements?",
+        options: ["Yes", "No"],
+        correctAnswer: 0,
+        explanation: "Yes, R allows for nested decision-making structures to handle complex logic."
+      }
+    ],
     content: `
 # Decision Making in R
 
@@ -459,6 +783,38 @@ print(day_name) # Prints "Wednesday"
     title: 'Loops & Iteration',
     description: 'For, While, Repeat, and control statements (Break, Next, Return).',
     category: 'Logic & Data Structures',
+    quizQuestions: [
+      {
+        question: "Which loop is best when you know exactly how many times to iterate?",
+        options: ["while", "repeat", "for", "if"],
+        correctAnswer: 2,
+        explanation: "The 'for' loop is designed to iterate over a specific sequence or range."
+      },
+      {
+        question: "What does the 'next' statement do in a loop?",
+        options: ["Exits the loop", "Skips the current iteration", "Restarts the loop", "Does nothing"],
+        correctAnswer: 1,
+        explanation: "The 'next' statement skips the remaining code in the current loop iteration and moves to the next one."
+      },
+      {
+        question: "Which loop executes indefinitely until a 'break' is called?",
+        options: ["for", "while", "repeat", "foreach"],
+        correctAnswer: 2,
+        explanation: "The 'repeat' loop has no built-in condition and relies on an internal 'break' to stop."
+      },
+      {
+        question: "What is the condition for a 'while' loop to continue?",
+        options: ["The condition must be TRUE", "The condition must be FALSE", "The loop runs once regardless", "There is no condition"],
+        correctAnswer: 0,
+        explanation: "A 'while' loop checks its condition at the start of each iteration and only runs if it evaluates to TRUE."
+      },
+      {
+        question: "Which statement is used to immediately exit a loop?",
+        options: ["stop", "exit", "break", "end"],
+        correctAnswer: 2,
+        explanation: "The 'break' statement is used to terminate the loop execution and move to the next part of the program."
+      }
+    ],
     content: `
 # Loops and Iteration
 
@@ -514,6 +870,14 @@ for (i in 1:5) {
     title: '1D Storage: Vectors and Lists',
     description: 'Master the fundamental 1D data structures of R.',
     category: 'Logic & Data Structures',
+    staticOutputs: {
+      '# Example 1: Vectors\nnumeric_vec <- c(1, 2, 3, 4)\nchar_vec <- c("A", "B", "C")\n\n# Accessing elements\nchar_vec[2] # Returns "B"': {
+        output: ['[1] "B"']
+      },
+      '# Example 2: Lists\nmy_list <- list(\n  name = "Alice",\n  age = 22,\n  grades = c(90, 85, 88)\n)\n\n# Accessing elements\nmy_list$name\nmy_list[[3]] # Accesses the grades vector': {
+        output: ['[1] "Alice"', '[1] 90 85 88']
+      }
+    },
     content: `
 # 1D Data Storage
 
@@ -549,6 +913,17 @@ my_list[[3]] # Accesses the grades vector
     title: '2D Storage: Matrices and Data Frames',
     description: 'Learn about 2D data structures in R.',
     category: 'Logic & Data Structures',
+    staticOutputs: {
+      '# Example 1: Creating a Matrix\n# 3 rows, 2 columns\nmat <- matrix(1:6, nrow = 3, ncol = 2)\nprint(mat)': {
+        output: ['     [,1] [,2]', '[1,]    1    4', '[2,]    2    5', '[3,]    3    6']
+      },
+      '# Accessing: [row, column]\nmat[1, 2] # Row 1, Column 2': {
+        output: ['[1] 4']
+      },
+      '# Example 2: Data Frames\nstudents <- data.frame(\n  ID = 101:103,\n  Name = c("John", "Jane", "Joe"),\n  Score = c(88, 92, 85)\n)\n\n# Accessing a column\nstudents$Name': {
+        output: ['[1] "John" "Jane" "Joe"']
+      }
+    },
     content: `
 # 2D Data Storage
 
@@ -615,6 +990,38 @@ print(val)
     title: 'Introduction to Base R Graphics',
     description: 'Learn the built-in plotting functions of R.',
     category: 'Data visualisation basic graphs',
+    quizQuestions: [
+      {
+        question: "What is the primary function for general-purpose plotting in Base R?",
+        options: ["draw()", "plot()", "graph()", "chart()"],
+        correctAnswer: 1,
+        explanation: "The plot() function is the most versatile built-in function for creating graphics in Base R."
+      },
+      {
+        question: "Which function is specifically used to create histograms?",
+        options: ["histogram()", "hist()", "dist()", "freq()"],
+        correctAnswer: 1,
+        explanation: "The hist() function is used to visualize the distribution of numeric data."
+      },
+      {
+        question: "How do you add a title to a Base R plot?",
+        options: ["title = 'My Title'", "main = 'My Title'", "header = 'My Title'", "label = 'My Title'"],
+        correctAnswer: 1,
+        explanation: "The 'main' argument in plotting functions sets the main title of the graphic."
+      },
+      {
+        question: "What does the 'col' argument control?",
+        options: ["Column name", "Color of the plot elements", "Collection type", "Column width"],
+        correctAnswer: 1,
+        explanation: "The 'col' argument is used to specify colors for points, lines, and bars."
+      },
+      {
+        question: "In the 'Canvas' model of Base R, can you easily remove a layer once it's drawn?",
+        options: ["Yes", "No"],
+        correctAnswer: 1,
+        explanation: "Base R graphics are static; once a layer is added to the device, you usually have to redraw the entire plot to change it."
+      }
+    ],
     content: `
 # Base R Graphics
 
@@ -757,6 +1164,38 @@ pie(slices, labels = lbls, col=rainbow(length(lbls)), main="Colored Market Share
     title: 'Introduction to ggplot2',
     description: 'Learn the Grammar of Graphics with ggplot2.',
     category: 'ggplot2 in R',
+    quizQuestions: [
+      {
+        question: "What is the 'Grammar of Graphics'?",
+        options: ["A set of rules for naming variables", "A framework for building plots by adding layers", "A type of R function", "A data cleaning method"],
+        correctAnswer: 1,
+        explanation: "The Grammar of Graphics is the underlying philosophy of ggplot2, where plots are built layer by layer."
+      },
+      {
+        question: "Which function initializes a ggplot2 object?",
+        options: ["plot()", "ggplot()", "gg()", "make_plot()"],
+        correctAnswer: 1,
+        explanation: "The ggplot() function is the starting point for every ggplot2 graphic."
+      },
+      {
+        question: "What does 'aes()' stand for in ggplot2?",
+        options: ["Aesthetic mappings", "Automatic evaluation system", "Array entry selector", "Advanced editing suite"],
+        correctAnswer: 0,
+        explanation: "aes() is used to map variables in your data to visual properties like x, y, color, and size."
+      },
+      {
+        question: "Which symbol is used to add layers in ggplot2?",
+        options: [">", ">>", "+", "%>%"],
+        correctAnswer: 2,
+        explanation: "The '+' operator is used to add geoms, themes, and labels to a ggplot object."
+      },
+      {
+        question: "What are 'geoms' in ggplot2?",
+        options: ["Geometric objects representing data", "Geography modules", "Data generators", "Mathematical formulas"],
+        correctAnswer: 0,
+        explanation: "Geoms (like geom_point, geom_bar) define the actual visual marks that represent your data points."
+      }
+    ],
     content: `
 # Introduction to ggplot2
 
@@ -922,6 +1361,38 @@ ggplot(df, aes(x=2, y=value, fill=group)) +
     title: 'Introduction to Plotly',
     description: 'Create interactive web-based graphics with Plotly.',
     category: 'Plotly in R',
+    quizQuestions: [
+      {
+        question: "What is the main advantage of Plotly over Base R or ggplot2?",
+        options: ["It is faster", "It creates interactive graphics", "It uses less memory", "It is older"],
+        correctAnswer: 1,
+        explanation: "Plotly is specifically designed for creating interactive, web-based charts that allow zooming and hovering."
+      },
+      {
+        question: "Which function converts a ggplot2 object into an interactive Plotly chart?",
+        options: ["make_interactive()", "ggplotly()", "plotly_convert()", "gg_to_plotly()"],
+        correctAnswer: 1,
+        explanation: "The ggplotly() function is a powerful tool that instantly adds interactivity to existing ggplot2 plots."
+      },
+      {
+        question: "What is the primary function for creating plots directly in Plotly?",
+        options: ["plot()", "plotly()", "plot_ly()", "interactive_plot()"],
+        correctAnswer: 2,
+        explanation: "The plot_ly() function is the core function for building Plotly graphics from scratch."
+      },
+      {
+        question: "Can you zoom and pan on a Plotly chart in a web browser?",
+        options: ["Yes", "No"],
+        correctAnswer: 0,
+        explanation: "Yes, interactivity like zooming, panning, and tooltips is a key feature of Plotly."
+      },
+      {
+        question: "Which function is used to customize the non-data parts (like titles) of a Plotly chart?",
+        options: ["theme()", "layout()", "design()", "config()"],
+        correctAnswer: 1,
+        explanation: "The layout() function in Plotly is used to set titles, axis labels, and other global chart properties."
+      }
+    ],
     content: `
 # Introduction to Plotly
 
@@ -1095,6 +1566,38 @@ greet("Alice")    # Uses provided value
     title: 'The Tidyverse',
     description: 'An introduction to data manipulation with dplyr.',
     category: 'Data Engineering & ETL',
+    quizQuestions: [
+      {
+        question: "What is the 'Tidyverse'?",
+        options: ["A single R package", "A collection of R packages for data science", "A type of R data frame", "A coding style guide"],
+        correctAnswer: 1,
+        explanation: "The Tidyverse is a cohesive collection of packages (like dplyr, ggplot2, tidyr) designed for a consistent data science workflow."
+      },
+      {
+        question: "Which operator is used to chain functions together in the Tidyverse?",
+        options: ["+", "->", "%>%", "=="],
+        correctAnswer: 2,
+        explanation: "The pipe operator (%>%) passes the result of one function as the first argument to the next."
+      },
+      {
+        question: "Which dplyr verb is used to pick specific columns?",
+        options: ["filter()", "select()", "mutate()", "arrange()"],
+        correctAnswer: 1,
+        explanation: "The select() function is used to choose which variables (columns) to keep in your dataset."
+      },
+      {
+        question: "Which dplyr verb is used to create new variables based on existing ones?",
+        options: ["create()", "add()", "mutate()", "summarize()"],
+        correctAnswer: 2,
+        explanation: "The mutate() function allows you to add new columns or transform existing ones."
+      },
+      {
+        question: "Which dplyr verb is used to reorder rows?",
+        options: ["sort()", "order()", "arrange()", "rank()"],
+        correctAnswer: 2,
+        explanation: "The arrange() function sorts the rows of a data frame based on the values of one or more columns."
+      }
+    ],
     content: `
 # The Tidyverse
 
@@ -1129,6 +1632,38 @@ mtcars %>%
     title: 'Descriptive Statistics',
     description: 'Master Mean, Median, Mode, Variance, and Standard Deviation.',
     category: 'Statistics using R',
+    quizQuestions: [
+      {
+        question: "What does the 'mean()' function calculate?",
+        options: ["The middle value", "The most frequent value", "The average value", "The spread of data"],
+        correctAnswer: 2,
+        explanation: "The mean() function calculates the arithmetic average of a numeric vector."
+      },
+      {
+        question: "Which value represents the middle of a sorted dataset?",
+        options: ["Mean", "Median", "Mode", "Variance"],
+        correctAnswer: 1,
+        explanation: "The median is the value that splits a sorted dataset into two equal halves."
+      },
+      {
+        question: "Does R have a built-in 'mode()' function that returns the most frequent value?",
+        options: ["Yes", "No"],
+        correctAnswer: 1,
+        explanation: "No, the built-in mode() function in R returns the storage mode of an object. You usually need a custom function or a package to find the statistical mode."
+      },
+      {
+        question: "What does 'sd()' calculate?",
+        options: ["Standard Deviation", "Sample Distribution", "Simple Division", "Statistical Difference"],
+        correctAnswer: 0,
+        explanation: "The sd() function calculates the standard deviation, which measures the spread of data around the mean."
+      },
+      {
+        question: "Which function returns both the minimum and maximum values of a vector?",
+        options: ["minmax()", "spread()", "range()", "bounds()"],
+        correctAnswer: 2,
+        explanation: "The range() function returns a vector containing the minimum and maximum values."
+      }
+    ],
     content: `
 # Descriptive Statistics in R
 

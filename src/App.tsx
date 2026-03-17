@@ -8,17 +8,21 @@ import { Navbar } from './components/Navbar';
 import { HomeView } from './components/HomeView';
 import { TutorialList } from './components/TutorialList';
 import { TutorialViewer } from './components/TutorialViewer';
+import { DailyQuest } from './components/DailyQuest';
+import { QQuest } from './components/QQuest';
+import { Leaderboard } from './components/Leaderboard';
+import { AboutView } from './components/AboutView';
 import { tutorials } from './data/tutorials';
-import { LessonCreator } from './components/LessonCreator';
 import { Tutorial, ViewState } from './types';
 import { motion, AnimatePresence } from 'motion/react';
-import { Github, Twitter, Linkedin, Mail, Settings } from 'lucide-react';
+import { useUserStats } from './hooks/useUserStats';
 
 export default function App() {
   const [view, setView] = React.useState<ViewState | 'admin'>('home');
   const [selectedTutorial, setSelectedTutorial] = React.useState<Tutorial | null>(null);
-  const [curriculumCategory, setCurriculumCategory] = React.useState<string>('All');
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+
+  const { stats, loading, addXP, completeLesson, completeChallenge, saveQuizScore, progress } = useUserStats();
 
   const handleSelectTutorial = (tutorial: Tutorial) => {
     setSelectedTutorial(tutorial);
@@ -26,8 +30,7 @@ export default function App() {
     window.scrollTo(0, 0);
   };
 
-  const handleViewCurriculum = (category: string = 'All') => {
-    setCurriculumCategory(category);
+  const handleStartLearning = () => {
     setView('curriculum');
     window.scrollTo(0, 0);
   };
@@ -50,13 +53,31 @@ export default function App() {
 
   const currentIndex = selectedTutorial ? tutorials.findIndex(t => t.id === selectedTutorial.id) : -1;
 
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-white">
+        <div className="text-center">
+          <div className="animate-spin w-16 h-16 border-8 border-brutal-black border-t-transparent rounded-full mx-auto mb-6"></div>
+          <h2 className="text-2xl font-black uppercase tracking-tighter">Initializing R-Mastery...</h2>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar 
         onHome={() => setView('home')} 
-        onTutorials={() => handleViewCurriculum('All')}
+        onTutorials={() => setView('leaderboard')}
+        onChallenges={() => setView('dailyQuest')}
+        onQuizzes={() => setView('qQuest')}
+        onAbout={() => setView('about')}
+        onStartLearning={handleStartLearning}
         isMenuOpen={isMenuOpen}
         setIsMenuOpen={setIsMenuOpen}
+        xp={stats.xp}
+        level={stats.level}
+        progress={progress}
       />
 
       <main className="flex-1">
@@ -69,8 +90,8 @@ export default function App() {
               exit={{ opacity: 0 }}
             >
               <HomeView 
-                onStart={() => handleViewCurriculum('All')} 
-                onCategorySelect={handleViewCurriculum}
+                onStart={handleStartLearning} 
+                onExplore={() => setView('curriculum')}
               />
             </motion.div>
           ) : view === 'curriculum' ? (
@@ -79,21 +100,56 @@ export default function App() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="py-12"
             >
               <TutorialList 
                 onSelect={handleSelectTutorial} 
-                initialCategory={curriculumCategory}
               />
             </motion.div>
-          ) : view === 'admin' ? (
+          ) : view === 'leaderboard' ? (
             <motion.div
-              key="admin"
+              key="leaderboard"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
             >
-              <LessonCreator />
+              <Leaderboard />
+            </motion.div>
+          ) : view === 'dailyQuest' ? (
+            <motion.div
+              key="dailyQuest"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+            >
+              <DailyQuest 
+                completedQuests={stats.completedChallenges}
+                onComplete={(questId, badgeId) => {
+                  completeChallenge(questId, badgeId);
+                }} 
+              />
+            </motion.div>
+          ) : view === 'qQuest' ? (
+            <motion.div
+              key="qQuest"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+            >
+              <QQuest 
+                onComplete={(xp) => {
+                  addXP(xp);
+                }} 
+                onSaveScore={saveQuizScore}
+              />
+            </motion.div>
+          ) : view === 'about' ? (
+            <motion.div
+              key="about"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+            >
+              <AboutView />
             </motion.div>
           ) : (
             <motion.div
@@ -108,6 +164,13 @@ export default function App() {
                   onBack={() => setView('curriculum')}
                   onNext={currentIndex < tutorials.length - 1 ? handleNext : undefined}
                   onPrev={currentIndex > 0 ? handlePrev : undefined}
+                  onRunCode={() => {
+                    addXP(5);
+                  }}
+                  onComplete={() => {
+                    addXP(25);
+                    completeLesson(selectedTutorial.id);
+                  }}
                 />
               )}
             </motion.div>
@@ -119,7 +182,7 @@ export default function App() {
         <div className="max-w-7xl mx-auto grid md:grid-cols-4 gap-12">
           <div className="md:col-span-2">
             <h2 className="text-4xl font-black uppercase mb-6 tracking-tighter">R-Mastery</h2>
-            <p className="text-white/60 font-medium max-w-sm">
+            <p className="text-white/60 font-medium max-w-sm text-justify">
               Empowering the next generation of data scientists with high-quality, 
               accessible R programming education.
             </p>
@@ -129,14 +192,14 @@ export default function App() {
             <h4 className="font-black uppercase mb-6 text-brutal-yellow">Quick Links</h4>
             <ul className="flex flex-col gap-4 font-bold uppercase text-sm">
               <li><button onClick={() => setView('home')} className="hover:text-brutal-blue transition-colors">Home</button></li>
-              <li><button onClick={() => handleViewCurriculum('All')} className="hover:text-brutal-pink transition-colors">Curriculum</button></li>
-              <li><a href="#" className="hover:text-brutal-blue transition-colors">About</a></li>
+              <li><button onClick={() => setView('curriculum')} className="hover:text-brutal-pink transition-colors">Curriculum</button></li>
+              <li><button onClick={() => setView('about')} className="hover:text-brutal-blue transition-colors">About</button></li>
             </ul>
           </div>
 
           <div>
             <h4 className="font-black uppercase mb-6 text-brutal-pink">Student Message</h4>
-            <p className="text-sm font-medium mb-4 text-white/60">Have a question? Send a message to the team.</p>
+            <p className="text-sm font-medium mb-4 text-white/60 text-justify">Have a question? Send a message to the team.</p>
             <form onSubmit={(e) => { e.preventDefault(); alert('Message sent! Thank you.'); }} className="flex flex-col gap-2">
               <textarea 
                 placeholder="Write your message here..." 
